@@ -1,10 +1,11 @@
 import React from 'react';
 import { Form, ListGroup } from 'react-bootstrap';
+import './style.css'
 function TodoList(props) {
     return (
       <ListGroup>
         {props.list.map(item => (
-          <ListGroup.Item variant={item.complete ? "danger" : "success"}
+          <ListGroup.Item style={{width: 27 + 'rem'}} variant={item.complete ? "danger" : "success"}
             className={`complete-${item.complete.toString()}`}
             key={item._id}
           >

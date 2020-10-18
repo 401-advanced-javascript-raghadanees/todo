@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Nav } from 'react-bootstrap';
+
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import './todo.scss';
@@ -29,8 +31,18 @@ function ToDo() {
   },[] );
   return (
     <>
+    <Nav variant="tabs" defaultActiveKey="/home" style={{backgroundColor: 'rgb(238, 238, 245)'}}>
+  <Nav.Item>
+    <Nav.Link href="/home">HOME</Nav.Link>
+  </Nav.Item>
+  {/* <Nav.Item>
+    <Nav.Link eventKey="link-1">.</Nav.Link>
+  </Nav.Item> */}
+  
+  
+</Nav>
       <header>
-        <h2>
+        <h2 style={{color: 'rgb(88 93 90)', textAlign: 'center', padding: 2 +'rem'}}>
           There are {list.filter(item => !item.complete).length} Items To Complete
           </h2>
       </header>
