@@ -20,3 +20,6 @@
 ## UML
 ### lab-31 --> hooks and Bootstrap
 ![UML](/assets/lab31.jpg)
+
+### lab-32 --> custom hooks
+![UML](/assets/lab32.jpg)
