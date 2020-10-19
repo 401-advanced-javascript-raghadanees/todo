@@ -4,6 +4,7 @@ import { Nav } from 'react-bootstrap';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import './todo.scss';
+
 function ToDo() {
   const [list, setList] = useState([]);
   const addItem = (item) => {
@@ -19,6 +20,10 @@ function ToDo() {
       setList( list2 );
     }
   };
+
+  // useEffect(async() => {
+  //   let list = await axios.get('https://as-app-server.herokuapp.com/api/v1/todo').then((items)=> { return items.data.data})
+
   useEffect(() => {
     let list = [
       { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },

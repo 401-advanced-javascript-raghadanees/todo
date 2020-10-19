@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { Form, Card, Button } from 'react-bootstrap';
+import useForm from '../hooks/useForm';
+
+
 function TodoForm(props) {
-  const [item, setItem] = useState({});
-  const handleInputChange = e => {
-    setItem( {...item, [e.target.name]: e.target.value } );
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.target.reset();
+  // const [item, setItem] = useState({}); // text: value, complete: True...
+
+  // const [handleSubmit, handleInputChange, values] = useForm(handelUseForm);
+  // const [handleSubmit, handleInputChange] = useForm((item)=>{props.handleSubmit(item)});
+  const [handleSubmit, handleInputChange ] = useForm(handelUseForm);
+ 
+  function handelUseForm(item){ // JS hoisting 
+    console.log('handelUseForm,,,,,');
     props.handleSubmit(item);
-    const item1 = {};
-    setItem(item1);
   };
+
+ 
     return (
       <Card style={{marginRight: 8 + 'em', marginLeft: 8 + 'em'}}>
       <Form style={{padding: 2 + 'em'}}>
@@ -34,7 +38,7 @@ function TodoForm(props) {
             <span>Difficulty Rating</span>
             <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
           </label>
-          <Button variant="primary" size="lg" active >Add Item</Button>
+          <Button onClick={handleSubmit} variant="primary" size="lg" active >Add Item</Button>
         </form>
       </Form>
       </Card>
