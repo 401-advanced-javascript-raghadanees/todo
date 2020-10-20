@@ -40,7 +40,7 @@ const useAjax = (list,callback) => {
         axios.delete(url)
             .then(savedItem => {
                 console.log('delete  -->', savedItem)
-                callback(list.filter(item => item._id != id))
+                callback(list.filter(item => item._id !== id))
             })
     };
 
