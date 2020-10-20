@@ -10,7 +10,7 @@ function TodoList(props) {
           <ListGroup.Item variant={item.complete ? 'success' : 'secondary'} key={item._id} onClick={() => props.handleComplete(item._id)} className='mb-2'>
             <Card style={{ width: '23.5rem' }} >
             {/* {item.complete ? <Button style={{ width: '6rem' , height: '2.2rem' }} variant="success">complete</Button> : <Button style={{ width: '6rem' , height: '2.2rem' }} variant="danger">pending</Button> } */}
-            <Button style={{ width: '6rem' , height: '2.2rem' }} variant={item.complete ? 'success' : 'danger'}> complete </Button>
+            <Button style={{ width: '6rem' , height: '2.2rem' }} variant={item.complete ? 'success' : 'danger'}> {item.complete ? 'complete' : 'pending'} </Button>
               <Card.Body style={{ width: '23.5rem' }}>
               <Button style={{ width: '3rem' ,padding: '0rem', margin: 0 +'rem' , float: 'left' }} variant="primary" className="float-right" onClick={() => props.handleDelete(item._id)}>  {console.log('list item._id ----->', item._id)}X</Button>
 
