@@ -21,30 +21,29 @@ function TodoList(props) {
     return 0;
     // return ((a > b) ? 1 :(a < b) ? -1 : 0);
   }
-//   let tasksFilter = props.list.filter((i => settingsContext.showComplete ? i.complete : !i.complete) )
-//   console.log('tasksFilter--------------------',tasksFilter)
+  let tasksFilter = props.list.filter((i => settingsContext.showComplete ? i.complete : !i.complete) )
+  console.log('tasksFilter--------------------',tasksFilter)
 
-// let tasks = tasksFilter
-// .sort(compare)
-// .slice((props.page - 1) * settingsContext.tasksPerPage, (props.page) * settingsContext.tasksPerPage)
+let tasks = tasksFilter
+.sort(compare)
+.slice((props.page - 1) * settingsContext.tasksPerPage, (props.page) * settingsContext.tasksPerPage)
 
   return (
     <>
-   <Button class="d-inline" style={{ width: '5.5rem' }} variant='success' onClick={() => (settingsContext.setShowComplete)} > show {console.log('settingsContext.setShowComplete',(settingsContext.setShowComplete))} </Button>
+   <Button class="d-inline" style={{ width: '5.5rem', fontSize: '0.7rem', margin: 0.5 + 'rem', float: 'right' }} variant='dark' onClick={() => (settingsContext.showComplete ? settingsContext.setShowComplete(false) : settingsContext.setShowComplete(true))}> Other tasks</Button>
       <ListGroup style={{ width: '26rem' }} className='ml-5'>
      
-        {props.list.filter((i => settingsContext.showComplete ? i.complete : !i.complete) ).sort(compare)
-.slice((props.page - 1) * settingsContext.tasksPerPage, (props.page) * settingsContext.tasksPerPage).map(item => (
+        {tasks.map(item => (
 
             <ListGroup.Item variant={item.complete ? 'success' : 'secondary'} key={item._id} onClick={() => props.handleComplete(item._id)} className='mb-2'>
               <Card style={{ width: '23.5rem' }} >
                 {/* {item.complete ? <Button style={{ width: '6rem' , height: '2.2rem' }} variant="success">complete</Button> : <Button style={{ width: '6rem' , height: '2.2rem' }} variant="danger">pending</Button> } */}
                 <div>
-                  <Button class="d-inline" style={{ width: '5.5rem' }} variant={item.complete ? 'success' : 'danger'}> {item.complete ? 'complete' : 'pending'} </Button>
+                  <Button class="d-inline" style={{ width: '6rem' }} variant={item.complete ? 'success' : 'danger'}> {item.complete ? 'complete' : 'pending'} </Button>
                   <Button class="d-inline" style={{ width: '2rem' }} variant="light" className="float-right" onClick={() => props.handleDelete(item._id)}>  {console.log('list item._id ----->', item._id)}X</Button>
                 </div>
 
-                <Card.Body style={{ width: '23.5rem' }}>
+                <Card.Body style={{ padding: '0.4rem' }}>
 
                   {/* <Card.Title>{item.complete ? 'complete' : 'pending'} {console.log('list item ----->', item)} </Card.Title> */}
                   <Card.Subtitle className="mb-2 bottom">{item.assignee}</Card.Subtitle>
