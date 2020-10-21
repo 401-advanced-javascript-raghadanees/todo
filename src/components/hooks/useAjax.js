@@ -31,7 +31,7 @@ const useAjax = (list,callback) => {
                 console.log('put  -->', savedItem);
                 console.log('put data -->', data);
                 console.log('put list -->', list);
-                callback(list.map(listItem => listItem._id === data._id ? savedItem.data : listItem));
+                callback(list.filter(listItem => listItem._id === data._id ? savedItem.data : listItem));
             })
     };
 
@@ -40,7 +40,7 @@ const useAjax = (list,callback) => {
         axios.delete(url)
             .then(savedItem => {
                 console.log('delete  -->', savedItem)
-                // callback(list.filter(item => item._id != id))
+                callback(list.filter(item => item._id !== id))
             })
     };
 

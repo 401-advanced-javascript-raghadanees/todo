@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
-import Navbar  from 'react-bootstrap/Navbar';
-import Nav  from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import './todo.scss';
 import useAjax from '../hooks/useAjax.js';
+import { SettingsContext } from '../../context/settings/context';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo'; //lab Api
 // const todoAPI = 'https://as-app-server.herokuapp.com/api/v1/todo';
 
 const ToDo = () => {
-
+  const settingsContext = useContext(SettingsContext);
   const [list, setList] = useState([]);
-
+  const [page, setPage] = useState(1);
   const [getTask, postTask, putTask, deleteTask] = useAjax(list, setList);
-  
+
 
   const _addItem = (item) => {
     item.due = new Date();
@@ -45,33 +46,15 @@ const ToDo = () => {
 
       putTask(url, item);
     }
-    //   fetch(url, {
-    //     method: 'put',
-    //     mode: 'cors',
-    //     cache: 'no-cache',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(item)
-    //   })
-    //     .then(response => response.json())
-    //     .then(savedItem => {
-    //       setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
-    //     })
-    //     .catch(console.error);
-    // }
+    
   };
 
   const _getTodoItems = () => {
     getTask(todoAPI);
-    // fetch(todoAPI, {
-    //   method: 'get',
-    //   mode: 'cors',
-    // })
-    //   .then(data => data.json())
-    //   .then(data => setList(data.results))
-    //   .catch(console.error);
   };
 
   useEffect(_getTodoItems, []);
+
 
   const _deleteItem = id => {
     let item = list.filter(i => i._id === id)[0] || {};
@@ -84,25 +67,20 @@ const ToDo = () => {
 
   return (
     <>
-    <Nav variant="tabs" defaultActiveKey="/home" style={{backgroundColor: 'rgb(238, 238, 245)'}}>
-  <Nav.Item>
-    <Nav.Link href="/home">HOME</Nav.Link>
-  </Nav.Item>
-  
-  
-</Nav>
+      <Nav variant="tabs" defaultActiveKey="/home" style={{ backgroundColor: 'rgb(238, 238, 245)' }}>
+        <Nav.Item>
+          <Nav.Link href="/home">HOME</Nav.Link>
+        </Nav.Item>
+      </Nav>
+
       <header>
-        {/* <h2>
-          There are {list.filter(item => !item.complete).length} Items To Complete
-          {console.log('list ----->', list)} 
-        </h2> */}
-         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home" style={{ padding: 0.5 +'rem'}}>
-             {console.log('list ----->', list)} 
-             
-             There are {list.filter((item) => !item.complete).length }  Items To Complete
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="#home" style={{ padding: 0.5 + 'rem' }}>
+            {console.log('list ------->>>>', list)}
+
+             There are {list.filter((item) => !item.complete).length}  tasks to complete and  {list.filter((item) => item.complete).length} completed tasks
          </Navbar.Brand>
-        </Navbar> 
+        </Navbar>
 
       </header>
 
@@ -115,9 +93,17 @@ const ToDo = () => {
         <div>
           <TodoList
             list={list}
+            page={page}
             handleComplete={_toggleComplete}
             handleDelete={_deleteItem}
           />
+          <div className='ml-5'>
+            <button type="button" className={page === 1 && list.filter(i => settingsContext.showComplete ? true : !i.complete).length >= settingsContext.tasksPerPage ? 'd-none btn btn-secondary mr-2' : ' btn btn-secondary mr-2'} onClick={() => { setPage(page - 1) }}>previous</button>
+
+            <button type="button" className={Math.ceil(list.filter(i => settingsContext.showComplete ? true : !i.complete).length / settingsContext.tasksPerPage) === page ? 'd-none btn btn-secondary mr-2' : ' btn btn-secondary mr-2'} onClick={() => { setPage(page + 1) }}>next 
+            {/* {console.log('Math.ceil(((((', (Math.ceil(list.filter(i => settingsContext.showComplete ? true : !i.complete).length / settingsContext.tasksPerPage) === page ? 'd-none btn btn-secondary mr-2' : ' btn btn-secondary mr-2'))} */}
+            </button>
+          </div>
         </div>
       </section>
     </>
