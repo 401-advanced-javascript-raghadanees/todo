@@ -8,7 +8,7 @@ function SettingsProvider(props) {
     const [tasksPerPage, setTasksPerPage] = useState(3);
     const [sort, setSort] = useState('difficulty');
     const [showComplete, setShowComplete] = useState(false);
-
+console.log('showComplete, setShowComplete',showComplete, setShowComplete)
 
     const state = {
         tasksPerPage, 
@@ -18,7 +18,7 @@ function SettingsProvider(props) {
         setSort,
         setShowComplete
     }
-
+    
     return (
         <SettingsContext.Provider value={state}>
             {props.children}

@@ -21,13 +21,20 @@ function TodoList(props) {
     return 0;
     // return ((a > b) ? 1 :(a < b) ? -1 : 0);
   }
+//   let tasksFilter = props.list.filter((i => settingsContext.showComplete ? i.complete : !i.complete) )
+//   console.log('tasksFilter--------------------',tasksFilter)
+
+// let tasks = tasksFilter
+// .sort(compare)
+// .slice((props.page - 1) * settingsContext.tasksPerPage, (props.page) * settingsContext.tasksPerPage)
+
   return (
     <>
-
+   <Button class="d-inline" style={{ width: '5.5rem' }} variant='success' onClick={() => (settingsContext.setShowComplete)} > show {console.log('settingsContext.setShowComplete',(settingsContext.setShowComplete))} </Button>
       <ListGroup style={{ width: '26rem' }} className='ml-5'>
-        {props.list.filter(i => settingsContext.showComplete ? true : !i.complete)
-          .sort(compare)
-          .slice((props.page - 1) * settingsContext.tasksPerPage, (props.page) * settingsContext.tasksPerPage).map(item => (
+     
+        {props.list.filter((i => settingsContext.showComplete ? i.complete : !i.complete) ).sort(compare)
+.slice((props.page - 1) * settingsContext.tasksPerPage, (props.page) * settingsContext.tasksPerPage).map(item => (
 
             <ListGroup.Item variant={item.complete ? 'success' : 'secondary'} key={item._id} onClick={() => props.handleComplete(item._id)} className='mb-2'>
               <Card style={{ width: '23.5rem' }} >
@@ -51,6 +58,7 @@ function TodoList(props) {
 
             </ListGroup.Item>
           ))}
+
       </ListGroup>
     </>
 
