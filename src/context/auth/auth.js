@@ -16,17 +16,10 @@ class Auth extends React.Component {
 
         let okToRender = false; 
 
-        try {
-           
+        try {   
             // 1- is the user logged in ?
             // 2 - do u require certain action? does the have it
-            console.log('this.context.loggedIn', this.context.loggedIn);
-            console.log('this.context.isValidAction(this.props.action)', this.context.isValidAction(this.props.action));
-            okToRender = this.context.loggedIn && this.context.isValidAction(this.props.action)
-   console.log('okToRender', okToRender);
-   console.log('this.props.action', this.props.action);
-   console.log('this.context.loggedIn', this.context.loggedIn);
-   console.log('this.context.isValidAction(this.props.action)', this.context.isValidAction(this.props.action));
+            okToRender = this.context.loggedIn && this.context.isValidAction(this.props.action);
         } catch(e) {
             console.log("error in Auth component !")
         }
@@ -41,3 +34,9 @@ class Auth extends React.Component {
 
 
 export default Auth;
+
+// console.log('okToRender', okToRender);
+// console.log('this.props.action', this.props.action);
+// console.log('this.context.loggedIn', this.context.loggedIn);
+// console.log('this.context.loggedIn', this.context.loggedIn);
+// console.log('this.context.isValidAction(this.props.action)', this.context.isValidAction(this.props.action));

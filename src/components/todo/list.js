@@ -8,8 +8,8 @@ function TodoList(props) {
   // in function components you can use useContext(context) 
   // you can use any number of contexts here using useContext
   const settingsContext = useContext(SettingsContext);
-  console.log('from list ---->', settingsContext.tasksPerPage, 'list ---->', props.page - 1)
-  console.log('list2 ---->', (props.page) * settingsContext.tasksPerPage)
+  console.log('from list ---->', settingsContext.tasksPerPage, 'list ---->', props.page - 1);
+  console.log('list2 ---->', (props.page) * settingsContext.tasksPerPage);
 
   function compare(a, b) {
     a = a[settingsContext.sort];
@@ -22,7 +22,7 @@ function TodoList(props) {
     // return ((a > b) ? 1 :(a < b) ? -1 : 0);
   }
   let tasksFilter = props.list.filter((i => settingsContext.showComplete ? i.complete : !i.complete) )
-  console.log('tasksFilter--------------------',tasksFilter)
+  console.log('tasksFilter--------------------',tasksFilter);
 
 let tasks = tasksFilter
 .sort(compare)

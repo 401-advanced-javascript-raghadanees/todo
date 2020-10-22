@@ -35,13 +35,16 @@ import Signup from './context/auth/signup.js';
 function App() {
   return (
     <>
+      <AuthContext>
+        <Signup />
+      <Login />
       <SettingsContext>
+        <Auth action="read">
         <ToDo />
+        </Auth>
       </SettingsContext>
 
-      <AuthContext>
-        <Login />
-        <Signup />
+        
         <hr />
         {/* <DeleteLink />
         <ReadLink />

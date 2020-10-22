@@ -14,7 +14,7 @@ const useAjax = (list,callback) => {
     const postTask = (url, data) => {
         const options = {
             mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' ,'Authorization': `Bearer ${localStorage.getItem('token')}` },
             cache: 'no-cache',
             body: JSON.stringify(data)
         };
@@ -26,7 +26,13 @@ const useAjax = (list,callback) => {
     };
 
     const putTask = (url, data) => {
-        axios.put(url, data)
+        const options = {
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' ,'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            cache: 'no-cache',
+            body: JSON.stringify(data)
+        };
+        axios.put(url, data, options)
             .then(savedItem => {
                 console.log('put  -->', savedItem);
                 console.log('put data -->', data);
@@ -36,8 +42,12 @@ const useAjax = (list,callback) => {
     };
 
     const deleteTask = (url, id) => {
-
-        axios.delete(url)
+        const options = {
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' ,'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            cache: 'no-cache',
+        };
+        axios.delete(url, options)
             .then(savedItem => {
                 console.log('delete  -->', savedItem)
                 callback(list.filter(item => item._id !== id))

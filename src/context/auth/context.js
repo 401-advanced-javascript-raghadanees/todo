@@ -30,8 +30,8 @@ class AuthProvider extends React.Component {
             editor: ['edit', 'read']
         };
 
-        const role = this.state.user.role.toLowerCase();
-        console.log("role : ",role)
+        const role = this.state.user.user.role;
+        console.log("role ::::::: ",role)
         console.log("actions[role].includes(action): ",actions[role].includes(action))
         return actions[role].includes(action)
 
@@ -65,10 +65,13 @@ class AuthProvider extends React.Component {
                 method: 'post',
                 mode: 'cors',
                 cache: 'no-cache',
-                headers: { 'Authorization': `Basic ${encodedData}` }
+                headers: { 'Authorization': `Basic ${encodedData}` } 
+
             });
 
             let res = await result.json();
+            var token = res.token;
+            localStorage.setItem('token', token);
             console.log("res signin: ",res)
             // res has token {token: token, user: user};
             this.validateToken(res.token);
