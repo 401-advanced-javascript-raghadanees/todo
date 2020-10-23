@@ -32,7 +32,7 @@ class Login extends React.Component {
             <>
                 <Show condition={this.context.loggedIn}>
                     {/* <button onClick={this.context.logout}>Logout</button> */}
-                    <Button variant="primary" type="submit" onClick={this.context.logout}> Logout </Button>
+                    <Button variant="danger" type="submit" onClick={this.context.logout}> Logout </Button>
 
                 </Show>
                 <Show condition={!this.context.loggedIn}>
@@ -43,7 +43,7 @@ class Login extends React.Component {
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>User Name</Form.Label>
-                                <Form.Control type="username" placeholder="Enter User Name" name="username" onChange={this.handleChange} />
+                                <Form.Control placeholder="Enter User Name" name="username" onChange={this.handleChange} />
                             </Form.Group>
 
                             <Form.Group controlId="formBasicPassword">

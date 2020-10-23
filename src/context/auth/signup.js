@@ -52,7 +52,7 @@ class Signup extends React.Component {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" onChange={this.handleChange} />
+                            <Form.Control type="password" placeholder="Password" name= 'password' onChange={this.handleChange} />
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out" />

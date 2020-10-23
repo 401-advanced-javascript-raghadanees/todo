@@ -2,10 +2,13 @@ import React from 'react';
 import base64 from 'base-64';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
-
+import axios from 'axios';
+import { isConstant } from 'react-jsonschema-form/lib/utils';
 export const AuthContext = React.createContext();
 
 const API = "https://todo-api-laith.herokuapp.com/api/v1/users";
+// const API = "https://api-js401.herokuapp.com";
+// 
 
 class AuthProvider extends React.Component {
 
@@ -38,14 +41,14 @@ class AuthProvider extends React.Component {
     }
 
     signup = async (username, password, email, role) => {
-
+console.log('password signup', password ,username)
         try {
             const result = await fetch(`${API}/signup`, {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ username, password, email, role })
+                body: JSON.stringify(({ username, password, email, role }))
             });
             let res = await result.json();
             console.log("res Signup: ",res)
@@ -56,25 +59,39 @@ class AuthProvider extends React.Component {
         }
     }
 
+    //  login = (username, password) => {
+    //     const encoded = base64.encode(`${username}:${password}`);
+    //       axiosApiInstance(`${API}/signin`, "post", { username, password }, { Authorization: `Basic ${encoded}` })
+    //       .then(response => {
+    //           validateToken(response?.data?.token);
+    //       })
+    //       .catch(console.error);
+    //   }
+  
 
     login = async (username, password)=> {
         try {
-            
+            console.log('username...... ', username, password);
             const encodedData = base64.encode(`${username}:${password}`);
-            const result = await fetch(`${API}/signin`, {
+            const result = await axios( {
                 method: 'post',
+                url: `${API}/signin`,
                 mode: 'cors',
                 cache: 'no-cache',
                 headers: { 'Authorization': `Basic ${encodedData}` } 
 
             });
+console.log('result...........',result);
+// console.log("body",await result.body.getReader());
+// const reader = body.getReader();
 
-            let res = await result.json();
-            var token = res.token;
-            localStorage.setItem('token', token);
-            console.log("res signin: ",res)
+            // let res = await result.json();
+            // let res = await result.text();
+            var token = result.data.token;
+           localStorage.setItem('token',token);
+        //    console.log("res signin: ",res)
             // res has token {token: token, user: user};
-            this.validateToken(res.token);
+            this.validateToken(token);
 
         } catch(e) {
             console.log("error : ", e);
