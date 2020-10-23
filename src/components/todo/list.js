@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import { ListGroup, Card, Button } from 'react-bootstrap';
 import './style.css';
 import { SettingsContext } from '../../context/settings/context';
@@ -57,6 +57,7 @@ let tasks = tasksFilter
 
             </ListGroup.Item>
           ))}
+
 
       </ListGroup>
     </>
